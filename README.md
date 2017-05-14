@@ -1,1 +1,2 @@
 # cinema
+Módulo sessão
