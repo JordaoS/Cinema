@@ -72,7 +72,7 @@ public class SessaoService implements ISessaoService{
     	List<Sessao> sessoes = sessaoRepositorio.findAll();
     	List<Sessao> result = new ArrayList<Sessao>();
         for(Sessao sessao: sessoes){
-            if(sessao.getFilme() == id){
+            if(sessao.getFilme().getId() == id){
             	result.add(sessao);
             }
         }
@@ -83,7 +83,7 @@ public class SessaoService implements ISessaoService{
     	List<Sessao> sessoes = sessaoRepositorio.findAll();
     	List<Sessao> result = new ArrayList<Sessao>();
         for(Sessao sessao: sessoes){
-            if(sessao.getSala() == id){
+            if(sessao.getSala().getId() == id){
             	result.add(sessao);
             }
         }

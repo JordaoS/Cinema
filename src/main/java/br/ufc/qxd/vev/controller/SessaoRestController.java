@@ -70,6 +70,7 @@ public class SessaoRestController {
 	@ResponseBody
 	public String create(@RequestBody Sessao sessao) {
 		String timeId = "";
+		System.out.println(sessao.getFilme().getTitulo());
 		try {
 			sessaoService.saveUser(sessao);
 		}catch (Exception ex) {
@@ -77,6 +78,11 @@ public class SessaoRestController {
 		}
 		return "{\"message\": \"Sessão cadastrada com sucesso.\"}";
 	}
+	
+	/*@RequestMapping(value = "/create", method = RequestMethod.GET)
+	public String create_page() {
+		return "index2";
+	}*/
 	
 	@RequestMapping(value = "/getByFilme/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> getByFilme(@PathVariable("id") long id) {

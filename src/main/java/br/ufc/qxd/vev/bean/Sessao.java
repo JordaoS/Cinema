@@ -5,13 +5,22 @@ import java.sql.Time;
 
 import java.util.Calendar;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -21,11 +30,17 @@ public class Sessao {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
-	private Integer filme;
-	private Integer sala;
+	@JoinColumn(name = "filme", referencedColumnName = "id")
+    @ManyToOne
+	private Filme filme;
+	
+	@JoinColumn(name = "sala", referencedColumnName = "id")
+    @ManyToOne
+	private Sala sala;
 	
 	private String horaInicio;
 	private String horaFim;
+	
 	
 	private Date data;
 
@@ -37,19 +52,19 @@ public class Sessao {
 		this.id = id;
 	}
 
-	public Integer getFilme() {
+	public Filme getFilme() {
 		return filme;
 	}
 
-	public void setFilme(Integer filme) {
+	public void setFilme(Filme filme) {
 		this.filme = filme;
 	}
 
-	public Integer getSala() {
+	public Sala getSala() {
 		return sala;
 	}
 
-	public void setSala(Integer sala) {
+	public void setSala(Sala sala) {
 		this.sala = sala;
 	}
 
