@@ -2,12 +2,14 @@ package br.ufc.qxd.vev.controller;
 
 import java.util.ArrayList;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.ufc.qxd.vev.bean.*;
 
+@CrossOrigin(origins = "*")
 @RestController
 public class FilmeController {
 	

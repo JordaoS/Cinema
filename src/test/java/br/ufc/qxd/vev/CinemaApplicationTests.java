@@ -39,8 +39,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
-
-
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = CinemaApplication.class)
 @SpringBootTest
