@@ -1,0 +1,197 @@
+
+
+
+
+
+<section class="container">
+
+  <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Relatorio</h3>
+
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body table-responsive no-padding">
+              <hr>
+              <!-- Nav tabs -->
+              <ul class="nav nav-pills nav-justified" role="tablist">
+                <li role="presentation" class="active"><a href="#cinemas" aria-controls="cinemas" role="tab" data-toggle="tab">Por cinema</a></li>
+                <li role="presentation"><a href="#filmes" aria-controls="filmes" role="tab" data-toggle="tab">Por filme</a></li>
+              </ul>
+
+              <!-- Tab panes -->
+                <div class="tab-content">
+                  <div role="tabpanel" class="tab-pane active" id="cinemas">
+                    <br>
+
+                    <table class="table table-hover" *ngIf="!revelarPorCinema">
+                      <tbody>
+                        <tr>
+                          <th>Cinema</th>
+                          <th>Busca</th>
+                        </tr>
+                        <tr *ngFor="let cinema of cinemas">
+                          <td class="col-md-11">{{cinema.nome}}</td>
+                          <td><span class="label label-primary" (click)="relatorioPorCinema(cinema.id)"><i class="fa fa-search"></i></span></td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+
+
+                    <button class="btn btn-warning btn-flat" *ngIf="revelarPorCinema" (click)="voltarListaCidades()">Voltar para lista de cidades</button>
+
+                    <section  *ngIf="revelarPorCinema">
+                      <div class="box" *ngFor="let relatorio of relatorioCinema">
+                        <div class="box-header with-border">
+                          <h3 class="box-title">Filme: {{relatorio.filme.titulo}}</h3>
+                        </div><!-- /.box-header -->
+                        <div class="box-body">
+
+                          <div class="box">
+                            <div class="box-header with-border">
+                              <h3 class="box-title">Sobre</h3>
+                            </div><!-- /.box-header -->
+
+                            <div class="box-body">
+                              <p><span class="text-info">SINOPSE: </span><small>{{relatorio.filme.sinopse}}</small></p>
+                              <p><span class="text-info">DURAÇÃO: </span><small>{{relatorio.filme.duracao}}</small></p>
+                               <p><span class="text-info">CATEGORIA: </span><small>{{relatorio.filme.categoria.nome}}</small></p>
+                               <p><span class="text-info">TIPO: </span><small>{{relatorio.filme.tipo}}</small></p>
+
+                            </div><!-- /.box-body -->
+                          </div><!-- /.box -->
+
+                          <div class="box">
+                            <div class="box-header with-border">
+                              <h3 class="box-title">Envolvidos</h3>
+                            </div><!-- /.box-header -->
+                            <div class="box-body">
+                              <table class="table table-hover">
+                                  <tbody>
+                                    <tr>
+                                      <th>Nome</th>
+                                      <th>Papel</th>
+                                    </tr>
+                                    <tr *ngFor="let ator of relatorio.filme.atores">
+                                      <td class="col-md-10">{{ator.nome}}</td>
+                                      <td>{{ator.papel}}</td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+
+                            </div><!-- /.box-body -->
+                          </div><!-- /.box -->
+
+                          <div class="box">
+                            <div class="box-header with-border">
+                              <h3 class="box-title">Salas</h3>
+                            </div><!-- /.box-header -->
+                            <div class="box-body">
+                            <div class="col-md-6" *ngFor="let sala of relatorio.salasSessoesDoFilme">
+
+                                <div class="box" >
+                                  <div class="box-header with-border">
+                                    <h3 class="box-title">{{sala.nome}}</h3>
+                                  </div><!-- /.box-header -->
+
+                                  <div class="box-body">
+                                    <p><span class="text-info">TIPO: </span><small>{{sala.tipo}}</small></p>
+                                    <p><span class="text-info">HORARIO: </span><small>{{sala.horario}}</small></p>
+                                    <p><span class="text-info">DATA: </span><small>{{sala.data}}</small></p>
+                                    <p><span class="text-info">QUANTIDADE DE ACENTOS: </span><small>{{sala.qtdAcento}}</small></p>
+                                  </div><!-- /.box-body -->
+                                </div><!-- /.box -->
+
+                              </div><!-- /.box-body -->
+                            </div>
+
+                          </div><!-- /.box -->
+
+                        </div><!-- /.box-body -->
+                      </div><!-- /.box -->
+
+                      <hr>
+                    </section>
+                  </div>
+
+
+                  <div role="tabpanel" class="tab-pane" id="filmes">
+                    <br>
+
+                    <table class="table table-hover" *ngIf="!revelarPorFilme">
+                      <tbody>
+                        <tr>
+                          <th>Titulo</th>
+                          <th>Busca</th>
+                        </tr>
+                        <tr *ngFor="let filme of filmes">
+                          <td class="col-md-11">{{filme.titulo}}</td>
+                          <td><span class="label label-primary" (click)="relatorioPorFilme(filme.id)"><i class="fa fa-search"></i></span></td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+
+                    <button class="btn btn-warning btn-flat" *ngIf="revelarPorFilme" (click)="voltarListaFilmes()">Voltar para lista de filmes</button>
+
+
+
+                    <section *ngIf="revelarPorFilme">
+                      <div class="box" *ngFor="let relatorio of relatorioFilme">
+                        <div class="box-header with-border">
+                          <h3 class="box-title">Cidade: {{relatorio.cinema.cidade}}</h3>
+                        </div><!-- /.box-header -->
+                        <div class="box-body">
+
+
+                          <div class="box">
+
+                            <div class="box-body">
+                            <p><span class="text-info">Cinema: {{relatorio.cinema.nome}}</span><small></small></p>
+                            </div><!-- /.box-body -->
+                          </div><!-- /.box -->
+
+                          <div class="box">
+                            <div class="box-header with-border">
+                              <h3 class="box-title">Salas</h3>
+                            </div><!-- /.box-header -->
+                            <div class="box-body">
+                            <div class="col-md-6" >
+
+                                <div class="box" *ngFor="let sala of relatorio.salasSessoesDoCinema">
+                                  <div class="box-header with-border">
+                                    <h3 class="box-title"></h3>
+                                  </div><!-- /.box-header -->
+
+                                  <div class="box-body">
+                                    <p><span class="text-info">SALA: </span><small>{{sala.nome}}</small></p>
+                                    <p><span class="text-info">TIPO: </span><small>{{sala.tipo}}</small></p>
+                                    <p><span class="text-info">HORARIO: </span><small>{{sala.horario}}</small></p>
+                                    <p><span class="text-info">DATA: </span><small>{{sala.data}}</small></p>
+                                  </div><!-- /.box-body -->
+                                </div><!-- /.box -->
+
+                              </div><!-- /.box-body -->
+                            </div>
+
+                          </div><!-- /.box -->
+
+                        </div><!-- /.box-body -->
+
+                        <br>
+                        <br>
+                      </div><!-- /.box -->
+                    </section>
+
+                  </div>
+              </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+      </div>
+</section>
